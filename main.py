@@ -21,12 +21,10 @@ def load_wordbase(filename, coding):
             wordlist.append(word.strip())
             reversed_wordlist.append(reverse_word(word.strip()))
 
-
 def input_from_file(filename, coding):
     input = open(filename, "r", encoding=coding)
     global inputletter
     inputletter = input.read(1)
-
 
 def output_to_file(filename, coding):
     output = open(filename, "w", encoding=coding)
@@ -53,11 +51,9 @@ def find(list, letter):
            #     print(starting_words)
           #      print(split_words)
 
-    for baseword in words_with_inputletter:
-        for firstword in words_with_inputletter:
-            for secondword in reversed_wordlist:
-                if baseword.startswith(firstword) and baseword.endswith(secondword) and baseword != secondword and baseword != firstword and len(baseword) > len(firstword) and len(baseword) > len(secondword):
-                    print(f"{baseword} - {firstword} {reverse_word(secondword)}")
+    for baseword, firstword, secondword in words_with_inputletter, words_with_inputletter, reversed_wordlist:
+        if baseword.startswith(firstword) and baseword.endswith(secondword) and baseword != secondword and baseword != firstword and len(baseword) > len(firstword) and len(baseword) > len(secondword):
+            print(f"{baseword} - {firstword} {reverse_word(secondword)}")
 
 
 load_wordbase("wordbases/slownik.txt", "windows-1250")
