@@ -5,7 +5,7 @@ menu(){
 	while read -r line
 	do
 		echo "$line"
-	done < menu.txt
+	done < resources/menu.txt
 
 	read -n 1  -s wybor;
 
@@ -15,7 +15,10 @@ menu(){
 		menu
 		;;
 	"2")
-		echo "Tataraki i balonik"
+		while read -r line
+	  do
+		  echo "$line"
+	  done < resources/info.txt
 		read -p "Wcisnij dowolny przycisk by kontynuowac" stop
 		menu
 		;;

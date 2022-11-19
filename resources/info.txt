@@ -1,0 +1,5 @@
+Program dla zadanej początkowej litery słowa, poszukuje w słowników wyrazów, które
+podzielić można w pewnym miejscu w taki sposób, że zarówno do miejsca podziału
+jak i do miejsca podziału (tą część odczytywana jest wspak), powstałe słowa znajdują się w słowniku.
+
+Program zwraca wszystkie wyrazy mające conajmniej dwie litery i będące na zadaną literę.
