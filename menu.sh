@@ -11,18 +11,23 @@ menu(){
 
 	case $wybor in
 	"1")
+		echo
 		read -p "Wcisnij dowolny przycisk by kontynuowac" stop
 		menu
 		;;
 	"2")
+		echo
 		while read -r line
-	  do
-		  echo "$line"
-	  done < resources/info.txt
+	  	do
+			echo "$line"
+	  	done < resources/info.txt
+
+		echo
 		read -p "Wcisnij dowolny przycisk by kontynuowac" stop
 		menu
 		;;
 	"3")
+		echo
 		read -p "Wcisnij dowolny przycisk by kontynuowac" stop
 		menu
 		;;
@@ -32,6 +37,7 @@ menu(){
 		;;
 	*)
 		echo "Wprowadzono niepoprawne polecenie"
+		echo
 		read -p "Wcisnij dowolny przycisk by kontynuowac" stop
 		menu
 		;;
