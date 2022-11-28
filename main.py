@@ -7,30 +7,37 @@ def reverse(word):
     return word[::-1]
 
 
-def missingfile(filename):
-    if filename == "input":
+def errorcodes(errorname):
+    if errorname == "keyletter":
+        print("Podana wartosc nie jest litera")
+        exit()
+    if errorname == "input":
         print("Nie znaleziono pliku input")
         exit()
-    if filename == "dictionary":
+    if errorname == "dictionary":
         print("Nie znaleziono pliku slownikowego")
         exit()
 
 
 # -----odczytanie, pobranie i przetworzenie danych------#
 
-database = "wordbases/.txt"
+database = "wordbases/test.txt"
 input = "input/input.txt"
 
 try:
     keyletter = open(input, "r", encoding='windows-1250')
     keyletter = keyletter.read(1)
+    try:
+        keyletter.isalnum()
+    except:
+        errorcodes("keyletter")
 except:
-    missingfile("input")
+    errorcodes("input")
 
 try:
     read = open(database, "r", encoding='windows-1250')
 except:
-    missingfile("dictionary")
+    errorcodes("dictionary")
 
 wordbank = []  # zawiera wszystkie slowa
 reversedWordbank = []  # zawiera wszystkie slowa odwrocone
