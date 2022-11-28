@@ -53,7 +53,6 @@ for x in wordbank:
     reversedWordbank.append(reverse(x))
 
 # ----------------------------------------------------------#
-
 for fullword in keywords:
     for firstword in keywords:
         for secondword in reversedWordbank:
