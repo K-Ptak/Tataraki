@@ -1,25 +1,51 @@
+import os
 from datetime import date
-
+from os import listdir
+from os.path import isfile, join, exists
 
 class HTMLCreator:
     def __init__(self):
-        self.html = open(f"backup/{date.today()}/index.html", "w")
+        if exists("output/raport.html"):
+            os.remove("output/raport.html")
+
+        self.outputfiles = [file for file in listdir("output") if isfile(join("output", file))]
+        self.inputfiles = [file for file in listdir("input") if isfile(join("input", file))]
+
+        self.html = open("output/raport.html", "w")
         self.html.write(f"""<!DOCTYPE html>
             <html>
             <head>
             <title>Raport {date.today()}</title>
             <link rel="stylesheet" href="style.css">
             </head>
-            <body>\n""")
+            <body>
+            <div class="container">\n""")
 
-    def tag(self, tag, content):
+    def doubletag(self, tag, content=""):
         self.html.write(f"<{tag}>{content}</{tag}>\n")
 
-    def opentag(self, tag):
+    def singletag(self, tag):
         self.html.write(f"<{tag}>\n")
 
-    def closetag(self, tag):
-        self.html.write(f"</{tag}>\n")
-
-
 raport = HTMLCreator()
+raport.doubletag("h1", f"Raport z dnia {date.today()}")
+raport.doubletag("div")
+raport.singletag("table")
+raport.singletag("tr")
+raport.doubletag("th", "Input")
+raport.doubletag("th", "Output")
+raport.singletag("/tr")
+
+for x in range(len(raport.outputfiles)):
+    raport.singletag("tr")
+    inputfile = open(f"input/{raport.inputfiles[x]}", "r")
+    raport.doubletag("td", f"{inputfile.read()}")
+    outputfile = open(f"output/{raport.outputfiles[x]}", "r")
+    raport.doubletag("td", f"{outputfile.read()}")
+    raport.singletag("/tr")
+
+raport.singletag("/table")
+raport.doubletag("footer", "@Kamil Ptak 2022r.")
+raport.singletag("/div")
+raport.singletag("/body")
+raport.singletag("/html")
