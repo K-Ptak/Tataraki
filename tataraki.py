@@ -59,6 +59,7 @@ for fullword in keywords:
             if firstword in fullword and len(fullword) - len(firstword) > 1:
                 tempword = fullword.replace(firstword, '')
                 if secondword in tempword and len(secondword) == len(tempword):
-                    print(f"{fullword} - {firstword} {reverse(secondword)}")
+                    outputfile = open("output/output.txt", "w")
+                    outputfile.write(f"{fullword} - {firstword} {reverse(secondword)}")
 print(" ")
 print("--- s% seconds ---" % (time.time() - start_time))
