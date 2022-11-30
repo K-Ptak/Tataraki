@@ -1,6 +1,7 @@
 import time
+import os
 from os import listdir
-from os.path import isfile, join
+from os.path import isfile, join, exists
 
 start_time = time.time()
 
@@ -35,6 +36,7 @@ for x in read:
     x = x.strip()
     if len(x) > 1:
         wordbank.append(x)
+        print(wordbank)
 
 for x in wordbank:
     reversedWordbank.append(reverse(x))
@@ -42,9 +44,11 @@ for x in wordbank:
 inputfiles = [file for file in listdir("input") if isfile(join("input", file))]
 for file in range(len(inputfiles)):
 
+    if exists(f"output/output{file}.txt"):
+        os.remove(f"output/output{file}.txt")
 
-    input = f"input/{inputfiles[file]}.txt"
-
+    input = f"input/{inputfiles[file]}"
+    print(input)
     try:
         keyletter = open(input, "r", encoding='windows-1250')
         keyletter = keyletter.read(1)
@@ -56,6 +60,7 @@ for file in range(len(inputfiles)):
         errorcodes("input")
 
     keywords = []  # zawiera same slowa zaczynajace sie na keyletter
+    buffer = [] # zawiera poprzednie wyniki
     for x in wordbank:
         if x.startswith(keyletter):
                 keywords.append(x)
@@ -67,11 +72,19 @@ for file in range(len(inputfiles)):
     for fullword in keywords:
         for firstword in keywords:
             for secondword in reversedWordbank:
-                if firstword in fullword and len(fullword) - len(firstword) > 1:
+                if firstword in fullword and len(fullword) - len(firstword) > 1 and len(fullword) != len(firstword):
                     tempword = fullword.replace(firstword, '')
                     if secondword in tempword and len(secondword) == len(tempword):
-                        outputfile = open(f"output/output{file}.txt", "w")
-                        outputfile.write(f"{fullword} - {firstword} {reverse(secondword)}")
+                        result = f"{fullword} - {firstword} {reverse(secondword)}\n"
+                        if result in buffer:
+                            continue
+                        else:
+                            outputfile = open(f"output/output{file}.txt", "a")
+                            outputfile.write(f"{fullword} - {firstword} {reverse(secondword)}\n")
+                            print(f"{fullword} - {firstword} {reverse(secondword)}\n")
+                            buffer.append(result)
 
+
+exec(open("raport.py").read())
 print(" ")
 print("--- s% seconds ---" % (time.time() - start_time))
