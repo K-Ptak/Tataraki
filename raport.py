@@ -16,7 +16,7 @@ class HTMLCreator:
             <html>
             <head>
             <title>Raport {date.today()}</title>
-            <link rel="stylesheet" href="style.css">
+            <link rel="stylesheet" href="../resources/style.css">
             </head>
             <body>
             <div class="container">\n""")
