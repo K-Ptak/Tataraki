@@ -1,5 +1,5 @@
 import os
-from datetime import date
+from datetime import date, datetime
 from os import listdir
 from os.path import isfile, join, exists
 
@@ -11,11 +11,13 @@ class HTMLCreator:
         self.outputfiles = [file for file in listdir("output") if isfile(join("output", file))]
         self.inputfiles = [file for file in listdir("input") if isfile(join("input", file))]
 
+        now = datetime.now()
+        self.fulldate = now.strftime("%d-%m-%Y %H:%M:%S")
         self.html = open("raport.html", "w")
         self.html.write(f"""<!DOCTYPE html>
             <html>
             <head>
-            <title>Raport {date.today()}</title>
+            <title>Raport {self.fulldate}</title>
             <link rel="stylesheet" href="../../resources/style.css">
             <link rel="stylesheet" href="resources/style.css">
             </head>
@@ -29,7 +31,7 @@ class HTMLCreator:
         self.html.write(f"<{tag}>\n")
 
 raport = HTMLCreator()
-raport.doubletag("h1", f"Raport z dnia {date.today()}")
+raport.doubletag("h1", f"Raport {raport.fulldate}")
 raport.doubletag("div")
 raport.singletag("table")
 raport.singletag("tr")
@@ -52,7 +54,7 @@ for x in range(len(raport.outputfiles)):
     raport.singletag("/tr")
 
 raport.singletag("/table")
-raport.singletag("/div")
 raport.doubletag("footer", "@Kamil Ptak 2022r.")
+raport.singletag("/div")
 raport.singletag("/body")
 raport.singletag("/html")
