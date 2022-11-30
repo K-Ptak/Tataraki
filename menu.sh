@@ -11,14 +11,17 @@ menu(){
 
 	case $wybor in
 	"1")
+		#Uruchom program
 		echo
 		python tataraki.py
-		echo "Program zostal uruchomiony pomyslnie"
-		xdg-open output/raport.html
+		echo "Program uruchomiony pomyslnie, otwieram wygenerowany raport"
+		xdg-open raport.html > /dev/null
+		echo
 		read -p "Wcisnij dowolny przycisk by kontynuowac" stop
 		menu
 		;;
 	"2")
+		#Wyswietl informacje
 		echo
 		while read -r line
 	  	do
@@ -30,15 +33,31 @@ menu(){
 		menu
 		;;
 	"3")
+		#Backup
 		echo
+		if [ ! -d "backups" ];
+		then
+			mkdir backups
+		fi
+		
+		printf -v date '%(%d-%m-%Y-%H:%M:%S)T\n' -1
+		mkdir backups/$date
+
+		cp -R input backups/$date
+		cp -R output backups/$date
+		cp raport.html backups/$date
+
+		echo "Backup został utworzony pomyslnie"
 		read -p "Wcisnij dowolny przycisk by kontynuowac" stop
 		menu
 		;;
 	"4")
+		#Wyjdz
 		clear
 		exit
 		;;
 	*)
+		#Niepoprawne polecenie
 		echo "Wprowadzono niepoprawne polecenie"
 		echo
 		read -p "Wcisnij dowolny przycisk by kontynuowac" stop
