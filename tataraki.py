@@ -36,7 +36,6 @@ for x in read:
     x = x.strip()
     if len(x) > 1:
         wordbank.append(x)
-        print(wordbank)
 
 for x in wordbank:
     reversedWordbank.append(reverse(x))
@@ -48,7 +47,6 @@ for file in range(len(inputfiles)):
         os.remove(f"output/output{file}.txt")
 
     input = f"input/{inputfiles[file]}"
-    print(input)
     try:
         keyletter = open(input, "r", encoding='windows-1250')
         keyletter = keyletter.read(1)
@@ -81,7 +79,6 @@ for file in range(len(inputfiles)):
                         else:
                             outputfile = open(f"output/output{file}.txt", "a")
                             outputfile.write(f"{fullword} - {firstword} {reverse(secondword)}\n")
-                            print(f"{fullword} - {firstword} {reverse(secondword)}\n")
                             buffer.append(result)
 
 
