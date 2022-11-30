@@ -13,13 +13,15 @@ class HTMLCreator:
 
         now = datetime.now()
         self.fulldate = now.strftime("%d-%m-%Y %H:%M:%S")
+        self.css = open("resources/style.css", "r")
         self.html = open("raport.html", "w")
         self.html.write(f"""<!DOCTYPE html>
             <html>
             <head>
             <title>Raport {self.fulldate}</title>
-            <link rel="stylesheet" href="../../resources/style.css">
-            <link rel="stylesheet" href="resources/style.css">
+            <style>
+            {self.css.read()}
+            </style>
             </head>
             <body>
             <div class="container">\n""")
