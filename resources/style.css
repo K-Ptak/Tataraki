@@ -4,6 +4,7 @@ body{
     background-color: #1b1d1e;
     font-family: 'Montserrat', sans-serif;
     text-align: center;
+    color: snow;
 }
 
 .container{
@@ -14,4 +15,12 @@ body{
 
 table, th, td {
   border: 1px solid;
+}
+
+h1, footer{
+    width: 100%
+}
+
+footer{
+    margin-top: 5%
 }
