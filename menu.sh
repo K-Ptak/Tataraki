@@ -12,6 +12,9 @@ menu(){
 	case $wybor in
 	"1")
 		echo
+		python tataraki.py
+		echo "Program zostal uruchomiony pomyslnie"
+		xdg-open output/raport.html
 		read -p "Wcisnij dowolny przycisk by kontynuowac" stop
 		menu
 		;;
