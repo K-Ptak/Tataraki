@@ -52,7 +52,7 @@ for x in range(len(raport.outputfiles)):
     raport.singletag("/tr")
 
 raport.singletag("/table")
-raport.doubletag("footer", "@Kamil Ptak 2022r.")
 raport.singletag("/div")
+raport.doubletag("footer", "@Kamil Ptak 2022r.")
 raport.singletag("/body")
 raport.singletag("/html")
