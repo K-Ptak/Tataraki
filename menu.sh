@@ -15,7 +15,7 @@ menu(){
 		echo
 		python tataraki.py
 		echo "Program uruchomiony pomyslnie, otwieram wygenerowany raport"
-		xdg-open raport.html > /dev/null
+		xdg-open raport.html > /dev/null &
 		echo
 		read -p "Wcisnij dowolny przycisk by kontynuowac" stop
 		menu
