@@ -63,9 +63,6 @@ for file in range(len(inputfiles)):
         if x.startswith(keyletter):
                 keywords.append(x)
 
-    for x in wordbank:
-        reversedWordbank.append(reverse(x))
-
     # ----------------------------------------------------------#
     for fullword in keywords:
         for firstword in keywords:
