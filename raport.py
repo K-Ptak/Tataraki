@@ -40,10 +40,15 @@ for x in range(len(raport.outputfiles)):
     raport.singletag("tr")
     inputfile = open(f"input/{raport.inputfiles[x]}", "r")
     raport.doubletag("td", f"{inputfile.read()}")
-    outputfile = open(f"output/{raport.outputfiles[x]}", "r")
-    raport.doubletag("td", f"{outputfile.read()}")
-    raport.singletag("/tr")
 
+    raport.singletag("td")
+    outputfile = open(f"output/{raport.outputfiles[x]}", "r")
+    lines = outputfile.readlines()
+    for index, singleline in enumerate(lines):
+        raport.doubletag("div", f"{singleline.strip()}")
+    raport.singletag("/td")
+
+    raport.singletag("/tr")
 raport.singletag("/table")
 raport.doubletag("footer", "@Kamil Ptak 2022r.")
 raport.singletag("/div")
