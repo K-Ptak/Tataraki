@@ -5,18 +5,19 @@ from os.path import isfile, join, exists
 
 class HTMLCreator:
     def __init__(self):
-        if exists("output/raport.html"):
-            os.remove("output/raport.html")
+        if exists("raport.html"):
+            os.remove("raport.html")
 
         self.outputfiles = [file for file in listdir("output") if isfile(join("output", file))]
         self.inputfiles = [file for file in listdir("input") if isfile(join("input", file))]
 
-        self.html = open("output/raport.html", "w")
+        self.html = open("raport.html", "w")
         self.html.write(f"""<!DOCTYPE html>
             <html>
             <head>
             <title>Raport {date.today()}</title>
-            <link rel="stylesheet" href="../resources/style.css">
+            <link rel="stylesheet" href="../../resources/style.css">
+            <link rel="stylesheet" href="resources/style.css">
             </head>
             <body>
             <div class="container">\n""")
@@ -49,6 +50,7 @@ for x in range(len(raport.outputfiles)):
     raport.singletag("/td")
 
     raport.singletag("/tr")
+
 raport.singletag("/table")
 raport.doubletag("footer", "@Kamil Ptak 2022r.")
 raport.singletag("/div")
