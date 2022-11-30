@@ -12,12 +12,12 @@ class HTMLCreator:
         self.inputfiles = [file for file in listdir("input") if isfile(join("input", file))]
 
         now = datetime.now()
-        self.data = now.strftime("%Y-%m-%d %H:%M:%S")
+        self.fulldate = now.strftime("%d-%m-%Y %H:%M:%S")
         self.html = open("raport.html", "w")
         self.html.write(f"""<!DOCTYPE html>
             <html>
             <head>
-            <title>Raport {self.data}</title>
+            <title>Raport {self.fulldate}</title>
             <link rel="stylesheet" href="../../resources/style.css">
             <link rel="stylesheet" href="resources/style.css">
             </head>
@@ -31,7 +31,7 @@ class HTMLCreator:
         self.html.write(f"<{tag}>\n")
 
 raport = HTMLCreator()
-raport.doubletag("h1", f"Raport {raport.data}")
+raport.doubletag("h1", f"Raport {raport.fulldate}")
 raport.doubletag("div")
 raport.singletag("table")
 raport.singletag("tr")
