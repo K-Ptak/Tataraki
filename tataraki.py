@@ -21,9 +21,11 @@ def errorcodes(errorname):
         print("Nie znaleziono pliku slownikowego")
         exit()
 
+def common_item(l1, l2): #returns list of items that are the same
+    return list(set(l1) & set(l2))
 
 # -----odczytanie, pobranie i przetworzenie danych------#
-database = "wordbases/test.txt"
+database = "wordbases/slownik.txt"
 wordbank = []  # zawiera wszystkie slowa
 reversedWordbank = []  # zawiera wszystkie slowa odwrocone
 
@@ -58,25 +60,63 @@ for file in range(len(inputfiles)):
         errorcodes("input")
 
     keywords = []  # zawiera same slowa zaczynajace sie na keyletter
-    buffer = [] # zawiera poprzednie wyniki
+    buffer = []  # zawiera poprzednie wyniki
     for x in wordbank:
         if x.startswith(keyletter):
-                keywords.append(x)
+            keywords.append(x)
 
+    #-------metoda zlaczania slow bez czasem-------------#
+    longest_string = max(wordbank, key=len)
+    longest_word = len(longest_string)
+    wordsbuffer = []
+    firstletterbuffer = []
+    secondletterbuffer = []
+    for x in keywords:
+        for y in reversedWordbank:
+            if len(x+y) < longest_word:
+                wordsbuffer.append(x+y)
+                firstletterbuffer.append(x)
+                secondletterbuffer.append(y)
+    """
+    for x in range(0, len(wordsbuffer)):
+        if wordsbuffer[x] in keywords:
+            print(f"{wordsbuffer[x]} - {firstletterbuffer[x]} - {secondletterbuffer[x]}")
+    """
+    print(common_item(keywords, wordsbuffer))
+    #-----------------------------------------------------#
+    """
     # ----------------------------------------------------------#
+    a = 1
+    b = 1
+    c = 1
+    d = 1
+    e = 1
+    f = 1
     for fullword in keywords:
+        print(f"{a} - {b} - {c} - {d} - {e} - {f}")
+        a += 1
         for firstword in keywords:
+            print(f"{a} - {b} - {c} - {d} - {e} - {f}")
+            b += 1
             for secondword in reversedWordbank:
+                print(f"{a} - {b} - {c} - {d} - {e} - {f}")
+                c += 1
                 if firstword in fullword and len(fullword) - len(firstword) > 1 and len(fullword) != len(firstword):
                     tempword = fullword.replace(firstword, '')
+                    print(f"{a} - {b} - {c} - {d} - {e} - {f}")
+                    d += 1
                     if secondword in tempword and len(secondword) == len(tempword):
                         result = f"{fullword} - {firstword} {reverse(secondword)}\n"
+                        print(f"{a} - {b} - {c} - {d} - {e} - {f}")
+                        e += 1
                         if result in buffer:
                             continue
                         else:
                             outputfile = open(f"output/output{file}.txt", "a")
                             outputfile.write(f"{fullword} - {firstword} {reverse(secondword)}\n")
                             buffer.append(result)
+                            print(f"{a} - {b} - {c} - {d} - {e} - {f}")
+                            f += 1"""
 
 
 exec(open("raport.py").read())
