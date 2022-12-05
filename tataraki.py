@@ -77,47 +77,28 @@ for file in range(len(inputfiles)):
                 wordsbuffer.append(x+y)
                 firstletterbuffer.append(x)
                 secondletterbuffer.append(y)
-    """
+
     for x in range(0, len(wordsbuffer)):
         if wordsbuffer[x] in keywords:
             print(f"{wordsbuffer[x]} - {firstletterbuffer[x]} - {secondletterbuffer[x]}")
-    """
-    print(common_item(keywords, wordsbuffer))
+    #print(common_item(keywords, wordsbuffer))
     #-----------------------------------------------------#
     """
     # ----------------------------------------------------------#
-    a = 1
-    b = 1
-    c = 1
-    d = 1
-    e = 1
-    f = 1
     for fullword in keywords:
-        print(f"{a} - {b} - {c} - {d} - {e} - {f}")
-        a += 1
         for firstword in keywords:
-            print(f"{a} - {b} - {c} - {d} - {e} - {f}")
-            b += 1
             for secondword in reversedWordbank:
-                print(f"{a} - {b} - {c} - {d} - {e} - {f}")
-                c += 1
                 if firstword in fullword and len(fullword) - len(firstword) > 1 and len(fullword) != len(firstword):
                     tempword = fullword.replace(firstword, '')
-                    print(f"{a} - {b} - {c} - {d} - {e} - {f}")
-                    d += 1
                     if secondword in tempword and len(secondword) == len(tempword):
                         result = f"{fullword} - {firstword} {reverse(secondword)}\n"
-                        print(f"{a} - {b} - {c} - {d} - {e} - {f}")
-                        e += 1
                         if result in buffer:
                             continue
                         else:
                             outputfile = open(f"output/output{file}.txt", "a")
                             outputfile.write(f"{fullword} - {firstword} {reverse(secondword)}\n")
                             buffer.append(result)
-                            print(f"{a} - {b} - {c} - {d} - {e} - {f}")
-                            f += 1"""
-
+    """
 
 exec(open("raport.py").read())
 print(" ")
