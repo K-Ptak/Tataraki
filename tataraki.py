@@ -21,9 +21,6 @@ def errorcodes(errorname):
         print("Nie znaleziono pliku slownikowego")
         exit()
 
-def common_item(l1, l2): #returns list of items that are the same
-    return list(set(l1) & set(l2))
-
 # -----odczytanie, pobranie i przetworzenie danych------#
 database = "wordbases/slownik.txt"
 wordbank = []  # zawiera wszystkie slowa
@@ -68,21 +65,39 @@ for file in range(len(inputfiles)):
     #-------metoda zlaczania slow bez czasem-------------#
     longest_string = max(wordbank, key=len)
     longest_word = len(longest_string)
-    wordsbuffer = []
-    firstletterbuffer = []
-    secondletterbuffer = []
+    wordsbuffer = open(f'temp_wbuffer.txt', 'w')
+    firstletterbuffer = open(f'temp_flbuffer.txt', 'w')
+    secondletterbuffer = open(f'temp_slbuffer.txt', 'w')
     for x in keywords:
         for y in reversedWordbank:
-            if len(x+y) < longest_word:
-                wordsbuffer.append(x+y)
-                firstletterbuffer.append(x)
-                secondletterbuffer.append(y)
+            if len(x+y) <= longest_word:
+                wordsbuffer.write(x+y+"\n")
+                firstletterbuffer.write(x+"\n")
+                secondletterbuffer.write(y+"\n")
+    wordsbuffer.close()
+    firstletterbuffer.close()
+    secondletterbuffer.close()
 
-    for x in range(0, len(wordsbuffer)):
-        if wordsbuffer[x] in keywords:
-            print(f"{wordsbuffer[x]} - {firstletterbuffer[x]} - {secondletterbuffer[x]}")
-    #print(common_item(keywords, wordsbuffer))
-    #-----------------------------------------------------#
+    with open(r"temp_wbuffer.txt", 'r') as fp:
+        for count, line in enumerate(fp):
+            pass
+    wordsbuffer_len = count + 1
+
+    wordsbuffer = open(f'temp_wbuffer.txt', 'r')
+    firstletterbuffer = open(f'temp_flbuffer.txt', 'r')
+    secondletterbuffer = open(f'temp_slbuffer.txt', 'r')
+
+    for x in range(0, wordsbuffer_len):
+        wbl = wordsbuffer.readline().strip()
+        flbl = firstletterbuffer.readline().strip()
+        slbl = secondletterbuffer.readline().strip()
+        if wbl in keywords:
+            print(f"{wbl} - {flbl} - {slbl}")
+
+    wordsbuffer.close()
+    firstletterbuffer.close()
+    secondletterbuffer.close()
+
     """
     # ----------------------------------------------------------#
     for fullword in keywords:
@@ -100,6 +115,6 @@ for file in range(len(inputfiles)):
                             buffer.append(result)
     """
 
-exec(open("raport.py").read())
+#exec(open("raport.py").read())
 print(" ")
 print("--- s% seconds ---" % (time.time() - start_time))
