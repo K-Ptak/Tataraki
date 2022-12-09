@@ -3,6 +3,7 @@ from datetime import date, datetime
 from os import listdir
 from os.path import isfile, join, exists
 
+
 class HTMLCreator:
     def __init__(self):
         if exists("raport.html"):
@@ -18,13 +19,19 @@ class HTMLCreator:
         self.html.write(f"""<!DOCTYPE html>
             <html>
             <head>
-            <title>Raport {self.fulldate}</title>
-            <style>
-            {self.css.read()}
-            </style>
+                <title>Raport {self.fulldate}</title>
+                <style>
+                {self.css.read()}
+                </style>
             </head>
             <body>
-            <div class="container">\n""")
+                <div class="container">
+                <h1>Raport {self.fulldate}</h1>
+                <table>
+                <tr>
+                    <th>Input</th>
+                    <th>Output</th>
+                </tr>\n""")
 
     def doubletag(self, tag, content=""):
         self.html.write(f"<{tag}>{content}</{tag}>\n")
@@ -32,14 +39,8 @@ class HTMLCreator:
     def singletag(self, tag):
         self.html.write(f"<{tag}>\n")
 
+
 raport = HTMLCreator()
-raport.doubletag("h1", f"Raport {raport.fulldate}")
-raport.doubletag("div")
-raport.singletag("table")
-raport.singletag("tr")
-raport.doubletag("th", "Input")
-raport.doubletag("th", "Output")
-raport.singletag("/tr")
 
 for x in range(len(raport.outputfiles)):
     raport.singletag("tr")
