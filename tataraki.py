@@ -24,7 +24,7 @@ def errorcodes(errorname):
 
 
 # -----odczytanie, pobranie i przetworzenie danych------#
-database = "wordbases/co2razy2.txt"
+database = "wordbases/slownik.txt"
 wordbank = []  # zawiera wszystkie slowa
 reversedWordbank = []  # zawiera wszystkie slowa odwrocone
 
@@ -65,7 +65,7 @@ for file in range(len(inputfiles)):
             keywords.append(x)
 
     # -------metoda zlaczania slow bez czasem-------------#
-    longest_word = len(max(wordbank, key=len))
+    longest_word = len(max(keywords, key=len))
 
     wordsbuffer = open(f'temp_wbuffer.txt', 'w')
     for x in keywords:
