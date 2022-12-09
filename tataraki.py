@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import time
 import os
 from os import listdir
@@ -21,13 +22,14 @@ def errorcodes(errorname):
         print("Nie znaleziono pliku slownikowego")
         exit()
 
+
 # -----odczytanie, pobranie i przetworzenie danych------#
-database = "wordbases/co2.txt"
+database = "wordbases/co2razy2.txt"
 wordbank = []  # zawiera wszystkie slowa
 reversedWordbank = []  # zawiera wszystkie slowa odwrocone
 
 try:
-    read = open(database, "r", encoding='windows-1250')
+    read = open(database, "r")
 except:
     errorcodes("dictionary")
 
@@ -47,7 +49,7 @@ for file in range(len(inputfiles)):
 
     input = f"input/{inputfiles[file]}"
     try:
-        keyletter = open(input, "r", encoding='windows-1250')
+        keyletter = open(input, "r")
         keyletter = keyletter.read(1)
         try:
             keyletter.isalnum()
@@ -62,21 +64,17 @@ for file in range(len(inputfiles)):
         if x.startswith(keyletter):
             keywords.append(x)
 
-    #-------metoda zlaczania slow bez czasem-------------#
-    longest_string = max(wordbank, key=len)
-    longest_word = len(longest_string)
+    # -------metoda zlaczania slow bez czasem-------------#
+    longest_word = len(max(wordbank, key=len))
+
     wordsbuffer = open(f'temp_wbuffer.txt', 'w')
-    firstletterbuffer = open(f'temp_flbuffer.txt', 'w')
-    secondletterbuffer = open(f'temp_slbuffer.txt', 'w')
     for x in keywords:
         for y in reversedWordbank:
-            if len(x+y) <= longest_word:
-                wordsbuffer.write(x+y+"\n")
-                firstletterbuffer.write(x+"\n")
-                secondletterbuffer.write(y+"\n")
+            if len(x+y) <= longest_word and x+y in keywords:
+                print(x+y)
+                wordsbuffer.write(x + y + " " + x + " " + reverse(y) + "\n")
+
     wordsbuffer.close()
-    firstletterbuffer.close()
-    secondletterbuffer.close()
 
     with open(r"temp_wbuffer.txt", 'r') as fp:
         for count, line in enumerate(fp):
@@ -84,19 +82,15 @@ for file in range(len(inputfiles)):
     wordsbuffer_len = count + 1
 
     wordsbuffer = open(f'temp_wbuffer.txt', 'r')
-    firstletterbuffer = open(f'temp_flbuffer.txt', 'r')
-    secondletterbuffer = open(f'temp_slbuffer.txt', 'r')
 
     for x in range(0, wordsbuffer_len):
-        wbl = wordsbuffer.readline().strip()
-        flbl = firstletterbuffer.readline().strip()
-        slbl = secondletterbuffer.readline().strip()
-        if wbl in keywords:
-            print(f"{wbl} - {flbl} - {slbl}")
+        line = wordsbuffer.readline().strip()
+        word = line.split(" ")[0]
+        firstw = line.split(" ")[1]
+        secondw = line.split(" ")[2]
+        print(f"{word} - {firstw} - {secondw}")
 
     wordsbuffer.close()
-    firstletterbuffer.close()
-    secondletterbuffer.close()
 
     """
     # ----------------------------------------------------------#
@@ -115,6 +109,6 @@ for file in range(len(inputfiles)):
                             buffer.append(result)
     """
 
-#exec(open("raport.py").read())
+# exec(open("raport.py").read())
 print(" ")
 print("--- s% seconds ---" % (time.time() - start_time))
