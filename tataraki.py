@@ -22,7 +22,7 @@ def errorcodes(errorname):
         exit()
 
 # -----odczytanie, pobranie i przetworzenie danych------#
-database = "wordbases/slownik.txt"
+database = "wordbases/co2.txt"
 wordbank = []  # zawiera wszystkie slowa
 reversedWordbank = []  # zawiera wszystkie slowa odwrocone
 
