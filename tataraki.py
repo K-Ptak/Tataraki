@@ -82,33 +82,18 @@ for file in range(len(inputfiles)):
     wordsbuffer_len = count + 1
 
     wordsbuffer = open(f'temp_wbuffer.txt', 'r')
+    outputfile = open(f"output/output{file}.txt", "a")
 
     for x in range(0, wordsbuffer_len):
         line = wordsbuffer.readline().strip()
         word = line.split(" ")[0]
         firstw = line.split(" ")[1]
         secondw = line.split(" ")[2]
-        print(f"{word} - {firstw} - {secondw}")
+        outputfile.write(f"{word} - {firstw} {secondw}\n")
 
     wordsbuffer.close()
+    outputfile.close()
 
-    """
-    # ----------------------------------------------------------#
-    for fullword in keywords:
-        for firstword in keywords:
-            for secondword in reversedWordbank:
-                if firstword in fullword and len(fullword) - len(firstword) > 1 and len(fullword) != len(firstword):
-                    tempword = fullword.replace(firstword, '')
-                    if secondword in tempword and len(secondword) == len(tempword):
-                        result = f"{fullword} - {firstword} {reverse(secondword)}\n"
-                        if result in buffer:
-                            continue
-                        else:
-                            outputfile = open(f"output/output{file}.txt", "a")
-                            outputfile.write(f"{fullword} - {firstword} {reverse(secondword)}\n")
-                            buffer.append(result)
-    """
-
-# exec(open("raport.py").read())
+exec(open("raport.py").read())
 print(" ")
 print("--- s% seconds ---" % (time.time() - start_time))
