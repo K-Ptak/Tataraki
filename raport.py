@@ -43,18 +43,30 @@ class HTMLCreator:
 raport = HTMLCreator()
 
 for x in range(len(raport.outputfiles)):
-    raport.singletag("tr")
-    inputfile = open(f"input/{raport.inputfiles[x]}", "r")
-    raport.doubletag("td", f"{inputfile.read()}")
+    output_number = ""
+    for letters in raport.outputfiles[x]:
+        if letters.isdigit():
+            output_number += letters
 
-    raport.singletag("td")
-    outputfile = open(f"output/{raport.outputfiles[x]}", "r")
-    lines = outputfile.readlines()
-    for index, singleline in enumerate(lines):
-        raport.doubletag("div", f"{singleline.strip()}")
-    raport.singletag("/td")
+    for y in range(len(raport.inputfiles)):
+        input_number = ""
+        for letters in raport.inputfiles[y]:
+            if letters.isdigit():
+                input_number += letters
 
-    raport.singletag("/tr")
+        if input_number == output_number:
+            raport.singletag("tr")
+            inputfile = open(f"input/{raport.inputfiles[y]}", "r")
+            raport.doubletag("td", f"{inputfile.read()}")
+
+            raport.singletag("td")
+            outputfile = open(f"output/{raport.outputfiles[x]}", "r")
+            lines = outputfile.readlines()
+            for index, singleline in enumerate(lines):
+                raport.doubletag("div", f"{singleline.strip()}")
+            raport.singletag("/td")
+
+            raport.singletag("/tr")
 
 raport.singletag("/table")
 raport.doubletag("footer", "@Kamil Ptak 2022r.")
