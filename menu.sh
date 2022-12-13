@@ -11,6 +11,12 @@ menu(){
 
 	case $wybor in
 	"1")
+	  dir="output"
+	  if [ -d $dir ];
+		then
+			rm -r $dir
+			mkdir $dir
+		fi
 		#Uruchom program
 		echo
     for file in "input"/*
@@ -18,7 +24,6 @@ menu(){
       file="${file:6}"
       python tataraki.py "$file"
     done
-    dir="output"
     if [ -d $dir ]
     then
 	    if [ "$(ls -A $dir)" ]; then
