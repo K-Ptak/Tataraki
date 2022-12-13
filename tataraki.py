@@ -2,7 +2,9 @@
 import os
 from os.path import exists
 import sys
+import re
 
+input = str(sys.argv[1])
 
 def reverse(word):
     return word[::-1]
@@ -10,21 +12,17 @@ def reverse(word):
 
 def errorcodes(errorname):
     if errorname == "keyletter":
-        print("Podana wartosc nie jest litera")
-        exit()
+        sys.exit(f"{input} - Podana wartosc nie jest litera")
     if errorname == "input":
-        print("Nie znaleziono pliku input")
-        exit()
+        sys.exit("Nie znaleziono pliku input")
     if errorname == "dictionary":
-        print("Nie znaleziono pliku slownikowego")
-        exit()
+        sys.exit("Nie znaleziono pliku slownikowego")
 
 
 # -----odczytanie, pobranie i przetworzenie danych------#
 database = "wordbases/test.txt"
 wordbank = []  # zawiera wszystkie slowa
 reversedWordbank = []  # zawiera wszystkie slowa odwrocone
-input = str(sys.argv[1])
 
 file_number = ""
 for letters in input:
@@ -34,12 +32,11 @@ for letters in input:
 try:
     keyletter = open(f"input/{input}", "r")
     keyletter = keyletter.read(1)
-    try:
-        keyletter.isalnum()
-    except:
-        errorcodes("keyletter")
 except:
     errorcodes("input")
+
+if not bool(re.match('^[a-zA-Z]*$', keyletter)):
+    errorcodes("keyletter")
 
 try:
     read = open(database, "r")

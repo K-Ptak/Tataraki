@@ -18,9 +18,19 @@ menu(){
       file="${file:6}"
       python tataraki.py "$file"
     done
-    python raport.py
-		echo "Program uruchomiony pomyslnie, otwieram wygenerowany raport"
-		xdg-open raport.html > /dev/null &
+    dir="output"
+    if [ -d $dir ]
+    then
+	    if [ "$(ls -A $dir)" ]; then
+        python raport.py
+		    echo "Program uruchomiony pomyslnie, otwieram wygenerowany raport"
+		    xdg-open raport.html > /dev/null &
+		    #not empty
+	    else
+	      echo "Brak wynikow dzialania programu"
+        #empty
+	    fi
+    fi
 		echo
 		read -p "Wcisnij dowolny przycisk by kontynuowac" stop
 		menu
