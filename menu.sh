@@ -13,7 +13,12 @@ menu(){
 	"1")
 		#Uruchom program
 		echo
-		python tataraki.py
+    for file in "input"/*
+    do
+      file="${file:6}"
+      python tataraki.py "$file"
+    done
+    python raport.py
 		echo "Program uruchomiony pomyslnie, otwieram wygenerowany raport"
 		xdg-open raport.html > /dev/null &
 		echo
