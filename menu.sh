@@ -1,5 +1,11 @@
 #!/bin/bash
 
+stop(){
+  echo
+	read -p "Wcisnij enter by kontynuowac" enter
+	menu
+}
+
 menu(){
 	clear
 	while read -r line
@@ -15,8 +21,8 @@ menu(){
 	  if [ -d $dir ]
 		then
 			rm -r $dir
-			mkdir $dir
 		fi
+		mkdir $dir
 		#Uruchom program
 		echo
     for file in "input"/*
@@ -28,17 +34,16 @@ menu(){
     then
 	    if [ "$(ls -A $dir)" ]; then
         python raport.py
+        echo
 		    echo "Program uruchomiony pomyslnie, otwieram wygenerowany raport"
-		    xdg-open raport.html > /dev/null &
+		    xdg-open raport.html </dev/null >/dev/null 2>&1 & disown
 		    #not empty
 	    else
 	      echo "Brak wynikow dzialania programu"
         #empty
 	    fi
     fi
-		echo
-		read -p "Wcisnij dowolny przycisk by kontynuowac" stop
-		menu
+	  stop
 		;;
 	"2")
 		#Wyswietl informacje
@@ -48,9 +53,7 @@ menu(){
 			echo "$line"
 	  	done < resources/info.txt
 
-		echo
-		read -p "Wcisnij dowolny przycisk by kontynuowac" stop
-		menu
+		stop
 		;;
 	"3")
 		#Backup
@@ -68,8 +71,7 @@ menu(){
 		cp raport.html backups/$date
 
 		echo "Backup został utworzony pomyslnie"
-		read -p "Wcisnij dowolny przycisk by kontynuowac" stop
-		menu
+		stop
 		;;
 	"4")
 		#Wyjdz
@@ -79,9 +81,7 @@ menu(){
 	*)
 		#Niepoprawne polecenie
 		echo "Wprowadzono niepoprawne polecenie"
-		echo
-		read -p "Wcisnij dowolny przycisk by kontynuowac" stop
-		menu
+		stop
 		;;
 	esac
 }

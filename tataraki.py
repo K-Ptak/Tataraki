@@ -6,6 +6,7 @@ import re
 
 input = str(sys.argv[1])
 
+
 def reverse(word):
     return word[::-1]
 
@@ -53,9 +54,6 @@ read.close()
 for x in wordbank:
     reversedWordbank.append(reverse(x))
 
-if exists(f"output/output{file_number}.txt"):
-    os.remove(f"output/output{file_number}.txt")
-
 keywords = []  # zawiera same slowa zaczynajace sie na keyletter
 buffer = []  # zawiera poprzednie wyniki
 for x in wordbank:
@@ -76,8 +74,8 @@ wordsbuffer.close()
 with open(r"temp_wbuffer.txt", 'r') as fp:
     for count, line in enumerate(fp):
         pass
-wordsbuffer_len = count + 1
 
+wordsbuffer_len = count + 1
 wordsbuffer = open(f'temp_wbuffer.txt', 'r')
 outputfile = open(f"output/output{file_number}.txt", "w")
 
@@ -87,5 +85,7 @@ for x in range(0, wordsbuffer_len):
     firstw = line.split(" ")[1]
     secondw = line.split(" ")[2]
     outputfile.write(f"{word} - {firstw} {secondw}\n")
+
 wordsbuffer.close()
+os.remove("temp_wbuffer.txt")
 outputfile.close()
