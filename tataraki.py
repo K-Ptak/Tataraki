@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import os
-from os.path import exists
 import sys
 import re
 
@@ -18,6 +17,8 @@ def errorcodes(errorname):
         sys.exit("Nie znaleziono pliku input")
     if errorname == "dictionary":
         sys.exit("Nie znaleziono pliku slownikowego")
+    if errorname == "empty":
+        sys.exit(f"{input} - Nie znaleziono slowa zaczynajacego sie na ta litere")
 
 
 # -----odczytanie, pobranie i przetworzenie danych------#
@@ -60,7 +61,10 @@ for x in wordbank:
     if x.startswith(keyletter):
         keywords.append(x)
 
-longest_word = len(max(keywords, key=len))
+try:
+    longest_word = len(max(keywords, key=len))
+except:
+    errorcodes("empty")
 
 wordsbuffer = open(f'temp_wbuffer.txt', 'w')
 
