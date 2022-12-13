@@ -19,14 +19,14 @@ class HTMLCreator:
         self.html.write(f"""<!DOCTYPE html>
             <html>
             <head>
-                <title>Raport {self.fulldate}</title>
+                <title>Raport z dnia {self.fulldate}</title>
                 <style>
                 {self.css.read()}
                 </style>
             </head>
             <body>
                 <div class="container">
-                <h1>Raport {self.fulldate}</h1>
+                <h1>Raport z dnia {self.fulldate}</h1>
                 <table>
                 <tr>
                     <th>Input</th>
