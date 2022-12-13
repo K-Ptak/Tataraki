@@ -12,7 +12,7 @@ menu(){
 	case $wybor in
 	"1")
 	  dir="output"
-	  if [ -d $dir ];
+	  if [ -d $dir ]
 		then
 			rm -r $dir
 			mkdir $dir
