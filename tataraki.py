@@ -23,8 +23,7 @@ def errorcodes(errorname):
         sys.exit(f"{input} - Nie znaleziono wynikow spelniajacych warunki")
 
 
-# -----odczytanie, pobranie i przetworzenie danych------#
-database = "wordbases/test.txt"
+database = "wordbases/slownik.txt"
 wordbank = []  # zawiera wszystkie slowa
 reversedWordbank = []  # zawiera wszystkie slowa odwrocone
 

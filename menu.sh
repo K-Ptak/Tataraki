@@ -16,14 +16,13 @@ menu(){
 	read -n 1  -s wybor;
 
 	case $wybor in
-	"1")
+	"1")#Uruchom program
 	  dir="output"
 	  if [ -d $dir ]
 		then
 			rm -r $dir
 		fi
 		mkdir $dir
-		#Uruchom program
 		echo
     for file in "input"/*
     do
@@ -49,8 +48,7 @@ menu(){
     fi
 	  stop
 		;;
-	"2")
-		#Wyswietl informacje
+	"2")#Wyswietl informacje
 		echo
 		while read -r line
 	  	do
@@ -59,8 +57,7 @@ menu(){
 
 		stop
 		;;
-	"3")
-		#Backup
+	"3")#Backup
     if [ -f "raport.html" ]; then
       if [ ! -d "backups" ];
 		  then
@@ -81,13 +78,11 @@ menu(){
     fi
 		stop
 		;;
-	"4")
-		#Wyjdz
+	"4")#Wyjdz
 		clear
 		exit
 		;;
-	*)
-		#Niepoprawne polecenie
+	*)#Niepoprawne polecenie
 		echo "Wprowadzono niepoprawne polecenie"
 		stop
 		;;
