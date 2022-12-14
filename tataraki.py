@@ -19,6 +19,8 @@ def errorcodes(errorname):
         sys.exit("Nie znaleziono pliku slownikowego")
     if errorname == "empty":
         sys.exit(f"{input} - Nie znaleziono slowa zaczynajacego sie na ta litere")
+    if errorname == "nooutput":
+        sys.exit(f"{input} - Nie znaleziono wynikow spelniajacych warunki")
 
 
 # -----odczytanie, pobranie i przetworzenie danych------#
@@ -75,9 +77,14 @@ for x in keywords:
 
 wordsbuffer.close()
 
+count = 0
 with open(r"temp_wbuffer.txt", 'r') as fp:
     for count, line in enumerate(fp):
         pass
+
+if count == 0:
+    errorcodes("nooutput")
+
 
 wordsbuffer_len = count + 1
 wordsbuffer = open(f'temp_wbuffer.txt', 'r')
