@@ -71,7 +71,7 @@ menu(){
 		cp -R output backups/$date
 		cp raport.html backups/$date
 
-		echo "Backup został utworzony pomyslnie"
+		echo "Backup zostal utworzony pomyslnie"
 		stop
     else
       echo "Nie znaleziono pliku raport.html"

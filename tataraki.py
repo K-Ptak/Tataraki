@@ -57,7 +57,6 @@ for x in wordbank:
     reversedWordbank.append(reverse(x))
 
 keywords = []  # zawiera same slowa zaczynajace sie na keyletter
-buffer = []  # zawiera poprzednie wyniki
 for x in wordbank:
     if x.startswith(keyletter):
         keywords.append(x)
