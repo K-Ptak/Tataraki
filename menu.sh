@@ -30,6 +30,10 @@ menu(){
       file="${file:6}"
       python tataraki.py "$file"
     done
+    if [ -f "temp_wbuffer.txt" ];
+		  then
+			  rm temp_wbuffer.txt
+		fi
     if [ -d $dir ]
     then
 	    if [ "$(ls -A $dir)" ]; then
@@ -57,12 +61,12 @@ menu(){
 		;;
 	"3")
 		#Backup
-		echo
-		if [ ! -d "backups" ];
-		then
-			mkdir backups
-		fi
-		
+    if [ -f "raport.html" ]; then
+      if [ ! -d "backups" ];
+		  then
+			  mkdir backups
+		  fi
+
 		printf -v date '%(%d-%m-%Y-%H:%M:%S)T\n' -1
 		mkdir backups/$date
 
@@ -71,6 +75,10 @@ menu(){
 		cp raport.html backups/$date
 
 		echo "Backup został utworzony pomyslnie"
+		stop
+    else
+      echo "Nie znaleziono pliku raport.html"
+    fi
 		stop
 		;;
 	"4")
