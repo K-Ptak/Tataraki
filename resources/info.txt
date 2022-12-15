@@ -3,3 +3,5 @@ podzielić można w pewnym miejscu w taki sposób, że zarówno do miejsca podzi
 jak i do miejsca podziału (tą część odczytywana jest wspak), powstałe słowa znajdują się w słowniku.
 
 Program zwraca wszystkie wyrazy mające conajmniej dwie litery i będące na zadaną literę.
+
+Autor projektu: Kamil Ptak grupa 4/8
