@@ -67,22 +67,28 @@ except:
     errorcodes("empty")
 
 wordsbuffer = open(f'temp_wbuffer.txt', 'w')
+buforx=[]
+bufory=[]
 
 for x in keywords:
     for y in reversedWordbank:
         if len(x + y) <= longest_word and x + y in keywords:
-            wordsbuffer.write(x + y + " " + x + " " + reverse(y) + "\n")
+            if x in buforx and y in bufory:
+                pass
+            else:
+                wordsbuffer.write(x + y + " " + x + " " + reverse(y) + "\n")
+                buforx.append(x)
+                bufory.append(y)
 
 wordsbuffer.close()
+
+if os.stat("temp_wbuffer.txt").st_size == 0:
+    errorcodes("nooutput")
 
 count = 0
 with open(r"temp_wbuffer.txt", 'r') as fp:
     for count, line in enumerate(fp):
         pass
-
-if count == 0:
-    errorcodes("nooutput")
-
 
 wordsbuffer_len = count + 1
 wordsbuffer = open(f'temp_wbuffer.txt', 'r')
